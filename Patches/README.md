@@ -8,3 +8,9 @@ Modify the `[adsr~]` object from ELSE 1.0 beta44 to have the same API as ELSE 1.
 - Default flag being `-log` instead of `-lin`.
 
 Modifications have been made to the source file. This directory stores the original reference.
+
+### sigmund~.c
+
+Use the `[sigmund~]` from Pd 0.54-1.
+
+The source file in the submodule remains version 0.52-0, which needs to be overwritten manually.
