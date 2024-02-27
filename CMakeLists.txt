@@ -1,4 +1,5 @@
 cmake_minimum_required(VERSION 3.12)
+set (CMAKE_CXX_STANDARD 20)
 
 set(CMAKE_OSX_DEPLOYMENT_TARGET "10.9" CACHE STRING "Minimum OS X deployment version")
 set(CMAKE_OSX_ARCHITECTURES "$(ARCHS_STANDARD)" CACHE STRING "" FORCE)
@@ -157,6 +158,7 @@ target_compile_definitions(Camomile PUBLIC ${CAMOMILE_COMPILE_DEFINITIONS})
 target_compile_definitions(CamomileFx PUBLIC ${CAMOMILE_COMPILE_DEFINITIONS})
 target_compile_definitions(Camomile_LV2 PRIVATE "JucePlugin_Build_LV2=1")
 
+include_directories("${SOURCES_DIRECTORY}/Pd/pd-else/shared")
 list(APPEND LIBPD_INCLUDE_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/libpd/pure-data/src")
 target_include_directories(Camomile PUBLIC "$<BUILD_INTERFACE:${LIBPD_INCLUDE_DIRECTORY}>")
 target_include_directories(CamomileFx PUBLIC "$<BUILD_INTERFACE:${LIBPD_INCLUDE_DIRECTORY}>")
