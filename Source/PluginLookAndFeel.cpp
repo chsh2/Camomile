@@ -85,13 +85,26 @@ Font CamoLookAndFeel::getDefaultFont()
     return DejaVu;
 }
 
+Font CamoLookAndFeel::getSarasaFont()
+{
+    static Font Sarasa = Font(Typeface::createSystemTypefaceFor(BinaryData::SarasaMonoSC_ttf, BinaryData::SarasaMonoSC_ttfSize)).withPointHeight(10.f);
+    Sarasa.setHorizontalScale(1.f);
+    Sarasa.setDefaultMinimumHorizontalScaleFactor(1.f);
+    return Sarasa;
+}
+
 Font CamoLookAndFeel::getFont(const std::string& name)
 {
+    // Override all GUI fonts with Sarasa Mono
+    return getSarasaFont();
+
+    /*
     if(name == "DejaVu Sans Mono")
     {
         return getDefaultFont();
     }
     return Font(String(name), Font::plain, 12.f);
+    */
 }
 
 Image const& CamoLookAndFeel::getImage()

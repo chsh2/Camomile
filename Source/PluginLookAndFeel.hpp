@@ -18,7 +18,9 @@ public:
     Font getPopupMenuFont() override;
     Font getTabButtonFont(TabBarButton&, float height) override;
     void drawLabel (Graphics& g, Label& label) override;
-    
+
+    // Add SarasaMono font in order to correctly display Chinese & Japanese characters 
+    static Font getSarasaFont();
     static Font getDefaultFont();
     static Font getFont(const std::string& name);
     static Image const& getImage();
