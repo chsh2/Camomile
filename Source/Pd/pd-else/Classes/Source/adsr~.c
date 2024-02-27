@@ -29,8 +29,8 @@ typedef struct _adsr{
 
 static t_class *adsr_class;
 
-static void adsr_log(t_adsr *x, t_floatarg f){
-    x->x_log = (int)(f != 0);
+static void adsr_lin(t_adsr *x, t_floatarg f){
+    x->x_log = (int)(f == 0);
 }
 
 static void adsr_bang(t_adsr *x){
@@ -42,7 +42,7 @@ static void adsr_bang(t_adsr *x){
 }
 
 static void adsr_float(t_adsr *x, t_floatarg f){
-    x->x_f_gate = f;
+    x->x_f_gate = f / 127;
     if(x->x_f_gate != 0){
         x->x_last_gate = x->x_f_gate;
         if(!x->x_status) // trigger it on
@@ -179,13 +179,13 @@ static void *adsr_new(t_symbol *sym, int ac, t_atom *av){
     x->x_nleft = 0;
     x->x_gate_status = 0;
     x->x_last_gate = 1;
-    x->x_log = 0;
+    x->x_log = 1;
     
-    float a = 0, d = 0, s = 0, r = 0;
+    float a = 10, d = 10, s = 1, r = 10;
     int symarg = 0;
     int argnum = 0;
     while(ac > 0){
-        if(av->a_type == A_FLOAT && !symarg){
+        if(av->a_type == A_FLOAT){
             float argval = atom_getfloatarg(0, ac, av);
             switch(argnum){
                 case 0:
@@ -207,23 +207,19 @@ static void *adsr_new(t_symbol *sym, int ac, t_atom *av){
             ac--;
             av++;
         }
-        else if(av->a_type == A_SYMBOL){
-            if(!symarg)
-                symarg = 1;
+        else if(av->a_type == A_SYMBOL && !symarg && !argnum){
+            symarg = 1;
             cursym = atom_getsymbolarg(0, ac, av);
-            if(cursym == gensym("-log")){
-                if(ac == 1){
-                    ac--, av++;
-                    x->x_log = 1;
-                }
-                else goto errstate;
+            if(cursym == gensym("-lin")){
+                ac--, av++;
+                x->x_log = 0;
             }
-            else goto errstate;
+            else
+                goto errstate;
         }
-        else goto errstate;
+        else
+            goto errstate;
     }
-    
-    
     x->x_inlet_attack = inlet_new((t_object *)x, (t_pd *)x, &s_signal, &s_signal);
         pd_float((t_pd *)x->x_inlet_attack, a);
     x->x_inlet_decay = inlet_new((t_object *)x, (t_pd *)x, &s_signal, &s_signal);
@@ -247,5 +243,6 @@ void adsr_tilde_setup(void){
     class_addmethod(adsr_class, (t_method) adsr_dsp, gensym("dsp"), A_CANT, 0);
     class_addfloat(adsr_class, (t_method)adsr_float);
     class_addbang(adsr_class, (t_method)adsr_bang);
-    class_addmethod(adsr_class, (t_method)adsr_log, gensym("log"), A_DEFFLOAT, 0);
+    class_addmethod(adsr_class, (t_method)adsr_lin, gensym("lin"), A_DEFFLOAT, 0);
 }
+
