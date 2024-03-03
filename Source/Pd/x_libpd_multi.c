@@ -555,7 +555,10 @@ void xmod2_tilde_setup(void);
 void xselect_tilde_setup(void);
 void xselect2_tilde_setup(void);
 void zerocross_tilde_setup(void);
-// end else objects functions declaration
+
+// cyclone objects declaration
+void greaterthan_tilde_setup(void);
+void lessthan_tilde_setup(void);
 
 void pd_tilde_setup(void);
 
@@ -835,6 +838,10 @@ void libpd_multi_init(void)
         xselect2_tilde_setup();
         zerocross_tilde_setup();
         // end else objects initialization
+
+        // cyclone objects initialization
+        greaterthan_tilde_setup();
+        lessthan_tilde_setup();
 
         initialized = 1;
     }
