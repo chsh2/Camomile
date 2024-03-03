@@ -1,3 +1,18 @@
+## Notes of This Fork
+
+The purpose of this fork is to develop my own audio plugins. To achieve this, several modifications were made based on [Camomile v1.0.8-beta10](https://github.com/pierreguillot/Camomile/tree/v1.0.8-beta10):
+
+- Add most of the external objects from [pd-else v1.0-beta44](https://github.com/porres/pd-else/tree/v1.0-beta44).
+- Add a few external objects from [cyclone v0.6.0](https://github.com/porres/pd-cyclone/tree/cyclone_0.6-0).
+- Modify a few objects. Check more [details](Patches/README.md).
+- Replace the default font with [Sarasa Mono](https://github.com/be5invis/Sarasa-Gothic) to display Chinese/Japanese characters. However, this also significantly increases the size of compiled binary files.
+
+Please note that this fork may not be suitable for general use. If you are looking for a Camomile fork that supports pd-else, please consider [porres/Camomile-ELSE](https://github.com/porres/Camomile-ELSE) or [emviveros/Camomile-ELSE](https://github.com/emviveros/Camomile-ELSE).
+
+---
+---
+---
+
 <p align="center">
   <a href="https://github.com/pierreguillot/Camomile/wiki">
     <img src="https://user-images.githubusercontent.com/1409918/37906678-2b998b0a-3103-11e8-946a-10df0f3d2eca.png" alt="Logo" width=72 height=72>
