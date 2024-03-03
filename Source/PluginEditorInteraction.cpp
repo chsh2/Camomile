@@ -256,10 +256,12 @@ bool CamomileEditorMessageManager::processMessages()
     {
         if(message[0] == string_openpanel)
         {
-            m_file_chooser = std::make_unique<FileChooser>("Open...", File(message[1]), "", useNative);
+            m_file_chooser = std::make_unique<FileChooser>("Open...", File(message[1]), "");
             if(m_file_chooser != nullptr)
             {
-                auto constexpr folderChooserFlags = FileChooserFlags::openMode | FileChooserFlags::canSelectDirectories;
+                auto constexpr folderChooserFlags = \
+                    FileChooserFlags::openMode \
+                    | FileChooserFlags::canSelectFiles;
                 auto const suspend = !message[2].empty();
                 WeakReference<CamomileEditorMessageManager> weakReference(this);
                 m_file_chooser->launchAsync(folderChooserFlags, [=, this](FileChooser const& fileChooser)

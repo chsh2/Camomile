@@ -6,6 +6,7 @@ The purpose of this fork is to develop my own audio plugins. To achieve this, se
 - Add a few external objects from [cyclone v0.6.0](https://github.com/porres/pd-cyclone/tree/cyclone_0.6-0).
 - Modify a few objects. Check more [details](Patches/README.md).
 - Replace the default font with [Sarasa Mono](https://github.com/be5invis/Sarasa-Gothic) to display Chinese/Japanese characters. However, this also significantly increases the size of compiled binary files.
+- Changes of some GUI components.
 
 Please note that this fork may not be suitable for general use. If you are looking for a Camomile fork that supports pd-else, please consider [porres/Camomile-ELSE](https://github.com/porres/Camomile-ELSE) or [emviveros/Camomile-ELSE](https://github.com/emviveros/Camomile-ELSE).
 
