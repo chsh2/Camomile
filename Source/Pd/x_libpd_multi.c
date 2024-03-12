@@ -559,6 +559,7 @@ void zerocross_tilde_setup(void);
 // cyclone objects declaration
 void greaterthan_tilde_setup(void);
 void lessthan_tilde_setup(void);
+void rampsmooth_tilde_setup(void);
 
 void pd_tilde_setup(void);
 
@@ -842,6 +843,7 @@ void libpd_multi_init(void)
         // cyclone objects initialization
         greaterthan_tilde_setup();
         lessthan_tilde_setup();
+        rampsmooth_tilde_setup();
 
         initialized = 1;
     }
