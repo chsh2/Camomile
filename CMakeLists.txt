@@ -159,6 +159,7 @@ target_compile_definitions(CamomileFx PUBLIC ${CAMOMILE_COMPILE_DEFINITIONS})
 target_compile_definitions(Camomile_LV2 PRIVATE "JucePlugin_Build_LV2=1")
 
 include_directories("${SOURCES_DIRECTORY}/Pd/pd-else/shared")
+include_directories("${SOURCES_DIRECTORY}/Pd/helmholtz/src/include")
 list(APPEND LIBPD_INCLUDE_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/libpd/pure-data/src")
 target_include_directories(Camomile PUBLIC "$<BUILD_INTERFACE:${LIBPD_INCLUDE_DIRECTORY}>")
 target_include_directories(CamomileFx PUBLIC "$<BUILD_INTERFACE:${LIBPD_INCLUDE_DIRECTORY}>")
@@ -196,3 +197,15 @@ foreach(OUTPUTCONFIG ${CMAKE_CONFIGURATION_TYPES})
       set_target_properties(Camomile_LV2 PROPERTIES LIBRARY_OUTPUT_DIRECTORY_${OUTPUTCONFIG} ${CAMOMILE_PLUGINS_LOCATION})
       set_target_properties(Camomile_LV2 PROPERTIES RUNTIME_OUTPUT_DIRECTORY_${OUTPUTCONFIG} ${CAMOMILE_PLUGINS_LOCATION})
 endforeach(OUTPUTCONFIG CMAKE_CONFIGURATION_TYPES)
+
+# Also compile externals as dynamic library for editing in PlugData
+set(EXTERNAL_COMPILE_DEFINITIONS
+    PDTHREADS=1
+)
+set(HelmholtzExternalSources ${CMAKE_CURRENT_SOURCE_DIR}/Source/Pd/helmholtz/src/helmholtz~.cpp ${CMAKE_CURRENT_SOURCE_DIR}/Source/Pd/helmholtz/src/Helmholtz.cpp)
+link_directories("C:/Program Files/PlugData")
+add_library(Helmholtz_External SHARED ${HelmholtzExternalSources} ${CMAKE_CURRENT_SOURCE_DIR}/Source/Pd/helmholtz/helmholtz~.def)
+set_target_properties(Helmholtz_External PROPERTIES OUTPUT_NAME "helmholtz~")
+target_include_directories(Helmholtz_External PUBLIC ${LIBPD_INCLUDE_DIRECTORY})
+target_link_libraries(Helmholtz_External pd)
+target_compile_definitions(Helmholtz_External PUBLIC ${EXTERNAL_COMPILE_DEFINITIONS})
