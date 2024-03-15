@@ -544,13 +544,25 @@ void GuiRadioVertical::mouseDown(const MouseEvent& e)
 
 GuiPanel::GuiPanel(CamomileEditorMouseManager& p, pd::Gui& g) : PluginEditorObject(p, g)
 {
-    setInterceptsMouseClicks(false, false);
+    //setInterceptsMouseClicks(false, false);
     edited = true;
 }
 
 void GuiPanel::paint(Graphics& g)
 {
     g.fillAll(Colour(static_cast<uint32>(gui.getBackgroundColor())));
+}
+
+void GuiPanel::mouseEnter(const MouseEvent& e)
+{
+    // This does not belong to the standard GUI behaviors of Pure Data
+    // If a panel (Pd canvas) has a label, trigger an event when the mouse moves inside
+    // This event helps to show hint texts in the plugin dynamically
+    auto label = getLabel();
+    if (label != nullptr) {
+        std::string symbol = "hint_" + label->getText().toStdString();
+        patch.getProcessor().enqueueMessages(symbol, "symbol", {symbol});
+    }
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////

@@ -161,6 +161,7 @@ class GuiPanel : public PluginEditorObject
 public:
     GuiPanel(CamomileEditorMouseManager& p, pd::Gui& g);
     void paint(Graphics& g) override;
+    void mouseEnter(const MouseEvent& e) override;
 };
 
 class GuiComment : public PluginEditorObject
