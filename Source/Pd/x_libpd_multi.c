@@ -584,7 +584,7 @@ void libpd_multi_init(void)
         libpd_multi_midi_setup();
         libpd_multi_print_setup();
         libpd_defaultfont_init();
-        libpd_set_verbose(4);
+        //libpd_set_verbose(4);
         
         socket_init();
 

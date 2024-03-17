@@ -21,7 +21,7 @@ public:
     using message_t = std::pair<level_t, std::string>;
     
     //! @brief the constructor.
-    CamomileConsole(const level_t maxlevel, size_t const preallocate = 512) :
+    CamomileConsole(const level_t maxlevel, size_t const preallocate = 4096) :
     m_max_level(maxlevel),
     m_counters(maxlevel, 0),
     m_messages(preallocate)

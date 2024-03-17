@@ -46,7 +46,7 @@ m_level_button(new ConsoleButton(ImageCache::getFromMemory(BinaryData::settings_
 m_clear_button(new ConsoleButton(ImageCache::getFromMemory(BinaryData::garbage_png, BinaryData::garbage_pngSize))),
 m_copy_button(new ConsoleButton(ImageCache::getFromMemory(BinaryData::copy_png, BinaryData::copy_pngSize))),
 m_reload_button(new ConsoleButton(ImageCache::getFromMemory(BinaryData::reload_png, BinaryData::reload_pngSize))),
-m_font(CamoLookAndFeel::getDefaultFont().withPointHeight(10.f))
+m_font(CamoLookAndFeel::getSarasaFont().withPointHeight(12.f))
 {
     m_size  = 0;
     setWantsKeyboardFocus(true);

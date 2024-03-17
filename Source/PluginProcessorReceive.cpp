@@ -117,7 +117,7 @@ void CamomileAudioProcessor::receivePrint(const std::string& message)
         else if(!message.compare(0, 11, "verbose(4):"))
         {
             std::string const temp(message.begin()+12, message.end());
-            add(ConsoleLevel::Error, temp);
+            add(ConsoleLevel::Log, temp);
         }
         else if(!message.compare(0, 5, "tried"))
         {
