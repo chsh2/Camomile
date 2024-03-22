@@ -260,7 +260,7 @@ void GuiBang::paint(Graphics& g)
         g.setColour(Colour(static_cast<uint32>(gui.getForegroundColor())));
         g.fillEllipse(border, border, w, w);
     }
-    g.setColour(Colours::black);
+    g.setColour(Colour(static_cast<uint32>(gui.getForegroundColor())));
     g.drawEllipse(border, border, w, w, border);
     g.drawRect(getLocalBounds(), static_cast<int>(border));
 }
@@ -293,10 +293,14 @@ void GuiToggle::paint(Graphics& g)
     {
         const float w = static_cast<float>(getWidth()) - border * 2.f;
         g.setColour(Colour(static_cast<uint32>(gui.getForegroundColor())));
-        g.drawLine(1.f + border, 1.f + border, w, w, border);
-        g.drawLine(w, 1.f + border, 1.f + border, w, border);
+        //g.drawLine(1.f + border, 1.f + border, w, w, border);
+        //g.drawLine(w, 1.f + border, 1.f + border, w, border);
+        auto const ft = CamoLookAndFeel::getFont(gui.getFontName()).withPointHeight(getWidth());
+        g.setFont(ft);
+        auto star = String(CharPointer_UTF8("\xe2\x98\x86"));
+        g.drawText(star, getLocalBounds(), Justification::centred, false);
     }
-    g.setColour(Colours::black);
+    g.setColour(Colour(static_cast<uint32>(gui.getForegroundColor())));
     g.drawRect(getLocalBounds(), static_cast<int>(border));
 }
 
@@ -323,7 +327,7 @@ void GuiSliderHorizontal::paint(Graphics& g)
     g.fillAll(Colour(static_cast<uint32>(gui.getBackgroundColor())));
     g.setColour(Colour(static_cast<uint32>(gui.getForegroundColor())));
     g.drawLine(pos, border + 0.5f, pos, h + 0.5f, crsor);
-    g.setColour(Colours::black);
+    //g.setColour(Colours::black);
     g.drawRect(getLocalBounds(), static_cast<int>(border));
 }
 
@@ -407,7 +411,7 @@ void GuiSliderVertical::paint(Graphics& g)
     g.fillAll(Colour(static_cast<uint32>(gui.getBackgroundColor())));
     g.setColour(Colour(static_cast<uint32>(gui.getForegroundColor())));
     g.drawLine(border + 0.5f, pos, w + 0.5f, pos, crsor);
-    g.setColour(Colours::black);
+    //g.setColour(Colours::black);
     g.drawRect(getLocalBounds(), static_cast<int>(border));
 }
 
@@ -491,7 +495,7 @@ void GuiRadioHorizontal::paint(Graphics& g)
     g.fillAll(Colour(static_cast<uint32>(gui.getBackgroundColor())));
     g.setColour(Colour(static_cast<uint32>(gui.getForegroundColor())));
     g.fillRect(w * getValueOriginal() + border + extra, border + extra, ws, hs);
-    g.setColour(Colours::black);
+    //g.setColour(Colours::black);
     for(size_t i = 1; i < size_t(max) + 1; ++i)
     {
         g.drawLine(w * static_cast<float>(i), 0.f, w * static_cast<float>(i), w, border);
@@ -522,7 +526,7 @@ void GuiRadioVertical::paint(Graphics& g)
     g.fillAll(Colour(static_cast<uint32>(gui.getBackgroundColor())));
     g.setColour(Colour(static_cast<uint32>(gui.getForegroundColor())));
     g.fillRect(border + extra, h * getValueOriginal() + border + extra, ws, hs);
-    g.setColour(Colours::black);
+    //g.setColour(Colours::black);
     for(size_t i = 1; i < static_cast<size_t>(max) + 1; ++i)
     {
         g.drawLine(0.f, h * static_cast<float>(i), h, h * static_cast<float>(i), border);
