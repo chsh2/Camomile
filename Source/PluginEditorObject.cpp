@@ -816,6 +816,14 @@ void GuiAtomNumber::mouseDoubleClick(const juce::MouseEvent&)
     }
 }
 
+void GuiAtomNumber::mouseEnter(const MouseEvent& e)
+{
+    // This does not belong to the standard GUI behaviors of Pure Data
+    // This event helps to show hint texts in the plugin dynamically
+    std::string symbol = "hint_atom_number";
+    patch.getProcessor().enqueueMessages(symbol, "symbol", {symbol});
+}
+
 //////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////     GATOM SYMBOL        /////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////

@@ -203,6 +203,7 @@ public:
     void mouseDrag(const juce::MouseEvent& e) override;
     void mouseUp(const juce::MouseEvent& e) override;
     void mouseDoubleClick(const juce::MouseEvent&) override;
+    void mouseEnter(const juce::MouseEvent&) override;
 private:
     bool    shift = false;
     float   last  = 0.0f;
