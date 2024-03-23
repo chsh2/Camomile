@@ -46,6 +46,7 @@ m_level_button(new ConsoleButton(ImageCache::getFromMemory(BinaryData::settings_
 m_clear_button(new ConsoleButton(ImageCache::getFromMemory(BinaryData::garbage_png, BinaryData::garbage_pngSize))),
 m_copy_button(new ConsoleButton(ImageCache::getFromMemory(BinaryData::copy_png, BinaryData::copy_pngSize))),
 m_reload_button(new ConsoleButton(ImageCache::getFromMemory(BinaryData::reload_png, BinaryData::reload_pngSize))),
+m_zoom_button(new ConsoleButton(ImageCache::getFromMemory(BinaryData::zoom_png, BinaryData::zoom_pngSize))),
 m_font(CamoLookAndFeel::getSarasaFont().withPointHeight(12.f))
 {
     m_size  = 0;
@@ -70,6 +71,8 @@ m_font(CamoLookAndFeel::getSarasaFont().withPointHeight(12.f))
     addAndMakeVisible(m_level_button.get());
     m_reload_button->addListener(this);
     addAndMakeVisible(m_reload_button.get());
+    m_zoom_button->addListener(this);
+    addAndMakeVisible(m_zoom_button.get());
     startTimer(100);
 }
 
@@ -145,6 +148,7 @@ void PluginEditorConsole::resized()
     m_clear_button->setTopLeftPosition(btn_woffset+btn_width*1, btn_height);
     m_copy_button->setTopLeftPosition(btn_woffset+btn_width*2, btn_height);
     m_reload_button->setTopLeftPosition(btn_woffset+btn_width*3, btn_height);
+    m_zoom_button->setTopLeftPosition(btn_woffset+btn_width*4, btn_height);
     m_table.setSize(tbl_wdith, tbl_height);
 }
 
@@ -177,7 +181,7 @@ void PluginEditorConsole::buttonClicked(Button* button)
     {
         copySelection();
     }
-    else
+    else if(button == m_level_button.get())
     {
         juce::PopupMenu menu;
         menu.addItem(1, "Fatal", true, m_level == ConsoleLevel::Fatal);
@@ -202,6 +206,30 @@ void PluginEditorConsole::buttonClicked(Button* button)
                 startTimer(100);
             }
         });
+    }
+    else if(button == m_zoom_button.get())
+    {
+        juce::PopupMenu menu;
+        menu.addItem(50, "50%", true, false);
+        menu.addItem(75, "75%", true, false);
+        menu.addItem(100, "100%", true, false);
+        menu.addItem(125, "125%", true, false);
+        menu.addItem(150, "150%", true, false);
+
+        juce::WeakReference<juce::Component> weakReference(this);
+        menu.showMenuAsync(juce::PopupMenu::Options(), [=, this](int scale_factor)
+        {
+            if(weakReference.get() == nullptr)
+            {
+                return;
+            }
+            if(scale_factor != 0)
+            {
+                stopTimer();
+                Desktop::getInstance().setGlobalScaleFactor(float(scale_factor) * 0.01);
+                startTimer(100);
+            }
+        });        
     }
 }
 

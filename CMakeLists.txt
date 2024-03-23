@@ -174,6 +174,7 @@ file(GLOB CamomileBinaryDataSources
     ${CMAKE_CURRENT_SOURCE_DIR}/Resources/Images/garbage.png
     ${CMAKE_CURRENT_SOURCE_DIR}/Resources/Images/copy.png
     ${CMAKE_CURRENT_SOURCE_DIR}/Resources/Images/reload.png
+    ${CMAKE_CURRENT_SOURCE_DIR}/Resources/Images/zoom.png
     ${CMAKE_CURRENT_SOURCE_DIR}/Resources/Images/flower_petals.png
     ${CMAKE_CURRENT_SOURCE_DIR}/Resources/Images/icon.png
     ${CMAKE_CURRENT_SOURCE_DIR}/Resources/Images/flower_center.png)

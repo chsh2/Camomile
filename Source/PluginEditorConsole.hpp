@@ -39,6 +39,7 @@ private:
     std::unique_ptr<Button>   m_clear_button;
     std::unique_ptr<Button>   m_copy_button;
     std::unique_ptr<Button>   m_reload_button;
+    std::unique_ptr<Button>   m_zoom_button;
     Font                    m_font;
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(PluginEditorConsole)
