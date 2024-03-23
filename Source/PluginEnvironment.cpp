@@ -53,6 +53,12 @@ const char* CamomileEnvironment::getPluginManufacturerUTF8() { return get().plug
 
 std::string CamomileEnvironment::getPluginManufacturer() { return get().plugin_manufacturer; }
 
+uint32_t CamomileEnvironment::getDefaultForegroundColor() {return get().default_foreground_color;};
+
+uint32_t CamomileEnvironment::getDefaultBackgroundColor() {return get().default_background_color;};
+
+uint32_t CamomileEnvironment::getTransparentColor() {return get().transparent_color;};
+
 bool CamomileEnvironment::isValid() { return get().valid; }
 
 std::string CamomileEnvironment::getPdVersion() {
@@ -394,6 +400,21 @@ CamomileEnvironment::CamomileEnvironment()
                             {
                                 throw std::string("\"") + type + std::string(" \"unknown.");
                             }
+                        }
+                        else if(entry.first == "default_foreground_color")
+                        {
+                            default_foreground_color = std::stoi(CamomileParser::getString(entry.second), 0, 16);
+                            default_foreground_color += 0xFF000000;
+                        }
+                        else if(entry.first == "default_background_color")
+                        {
+                            default_background_color = std::stoi(CamomileParser::getString(entry.second), 0, 16);
+                            default_background_color += 0xFF000000;
+                        }
+                        else if(entry.first == "transparent_color")
+                        {
+                            transparent_color = std::stoi(CamomileParser::getString(entry.second), 0, 16);
+                            transparent_color += 0xFF000000;
                         }
                         else
                         {

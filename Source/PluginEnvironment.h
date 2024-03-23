@@ -74,6 +74,12 @@ public:
     //! @brief Gets if the environment is valid.
     static bool isValid();
     
+    static uint32_t getDefaultForegroundColor();
+
+    static uint32_t getDefaultBackgroundColor();
+
+    static uint32_t getTransparentColor();
+
     //////////////////////////////////////////////////////////////////////////////////////////
     //                                      OPTIONS                                         //
     //////////////////////////////////////////////////////////////////////////////////////////
@@ -181,6 +187,10 @@ private:
     bool    m_auto_reload     = false;
     bool    m_auto_program    = true;
     bool    m_auto_bypass     = true;
+
+    uint32_t default_foreground_color = 0;
+    uint32_t default_background_color = 0xFFFFFFFF;
+    uint32_t transparent_color = 0xFFABCDEF;
     
     std::vector<std::string>    m_programs;
     std::vector<std::string>    m_params;

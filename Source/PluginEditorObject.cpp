@@ -494,8 +494,12 @@ void GuiRadioHorizontal::paint(Graphics& g)
     const float ws = w - 2.f * (border + extra);
     g.fillAll(Colour(static_cast<uint32>(gui.getBackgroundColor())));
     g.setColour(Colour(static_cast<uint32>(gui.getForegroundColor())));
-    g.fillRect(w * getValueOriginal() + border + extra, border + extra, ws, hs);
+    //g.fillRect(w * getValueOriginal() + border + extra, border + extra, ws, hs);
     //g.setColour(Colours::black);
+    auto const ft = CamoLookAndFeel::getFont(gui.getFontName()).withPointHeight(std::min(w, h) - 1);
+    g.setFont(ft);
+    auto star = String(CharPointer_UTF8("\xe2\x98\x86"));
+    g.drawText(star, w * getValueOriginal(), 0, w, h, Justification::centred, false);
     for(size_t i = 1; i < size_t(max) + 1; ++i)
     {
         g.drawLine(w * static_cast<float>(i), 0.f, w * static_cast<float>(i), w, border);
@@ -525,8 +529,13 @@ void GuiRadioVertical::paint(Graphics& g)
     const float ws = w - 2.f * (border + extra);
     g.fillAll(Colour(static_cast<uint32>(gui.getBackgroundColor())));
     g.setColour(Colour(static_cast<uint32>(gui.getForegroundColor())));
-    g.fillRect(border + extra, h * getValueOriginal() + border + extra, ws, hs);
+    //g.fillRect(border + extra, h * getValueOriginal() + border + extra, ws, hs);
     //g.setColour(Colours::black);
+    auto const ft = CamoLookAndFeel::getFont(gui.getFontName()).withPointHeight(std::min(w, h) - 1);
+    g.setFont(ft);
+    auto star = String(CharPointer_UTF8("\xe2\x98\x86"));
+    g.drawText(star, 0, h * getValueOriginal(), w, h, Justification::centred, false);
+
     for(size_t i = 1; i < static_cast<size_t>(max) + 1; ++i)
     {
         g.drawLine(0.f, h * static_cast<float>(i), h, h * static_cast<float>(i), border);
@@ -584,7 +593,7 @@ void GuiComment::paint(Graphics& g)
     const auto fheight = gui.getFontHeight();
     auto const ft = CamoLookAndFeel::getFont(gui.getFontName()).withPointHeight(fheight);
     g.setFont(ft);
-    g.setColour(Colours::black);
+    g.setColour(juce::Colour(static_cast<uint32>(gui.getBackgroundColor())));
     g.drawMultiLineText(gui.getText(), 0, static_cast<int>(ft.getAscent()), getWidth());
 }
 
@@ -688,7 +697,7 @@ void GuiNumber::paint(Graphics& g)
     g.setColour(juce::Colour(static_cast<uint32>(gui.getForegroundColor())));
     g.drawLine(0.f, 0.f, h * 0.5f, h * 0.5f, border);
     g.drawLine(0.f, h, h * 0.5f, h * 0.5f, border);
-    g.setColour(juce::Colours::black);
+    g.setColour(juce::Colour(static_cast<uint32>(gui.getForegroundColor())));
     g.strokePath(p, juce::PathStrokeType(border));
 }
 
@@ -749,7 +758,7 @@ void GuiAtomNumber::paint(juce::Graphics& g)
     p.closeSubPath();
     g.setColour(juce::Colour(static_cast<uint32>(gui.getBackgroundColor())));
     g.fillPath(p);
-    g.setColour(juce::Colours::black);
+    g.setColour(juce::Colour(static_cast<uint32>(gui.getForegroundColor())));
     g.strokePath(p, juce::PathStrokeType(border));
 }
 
@@ -853,7 +862,7 @@ void GuiAtomSymbol::paint(juce::Graphics& g)
     p.closeSubPath();
     g.setColour(juce::Colour(static_cast<uint32>(gui.getBackgroundColor())));
     g.fillPath(p);
-    g.setColour(juce::Colours::black);
+    g.setColour(juce::Colour(static_cast<uint32>(gui.getForegroundColor())));
     g.strokePath(p, juce::PathStrokeType(border));
 }
 
@@ -922,7 +931,7 @@ void GuiAtomList::paint(juce::Graphics& g)
     p.closeSubPath();
     g.setColour(juce::Colour(static_cast<uint32>(gui.getBackgroundColor())));
     g.fillPath(p);
-    g.setColour(juce::Colours::black);
+    g.setColour(juce::Colour(static_cast<uint32>(gui.getForegroundColor())));
     g.strokePath(p, juce::PathStrokeType(border));
 }
 

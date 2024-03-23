@@ -9,6 +9,7 @@
 
 #include "PdGui.hpp"
 #include "PdInstance.hpp"
+#include "../PluginConfig.h"
 
 extern "C"
 {
@@ -406,11 +407,16 @@ namespace pd
     
     unsigned int Gui::getBackgroundColor() const noexcept
     {
+        uint32_t color = CamomileEnvironment::getDefaultBackgroundColor();
         if(m_ptr && isIEM())
         {
-            return libpd_iemgui_get_background_color(m_ptr);
+            color = libpd_iemgui_get_background_color(m_ptr);
         }
-        return 0xffffffff;
+        if(color == CamomileEnvironment::getTransparentColor()) 
+        {
+            color %= 0xFF000000;
+        }
+        return color;
     }
     
     unsigned int Gui::getForegroundColor() const noexcept
@@ -419,7 +425,7 @@ namespace pd
         {
             return libpd_iemgui_get_foreground_color(m_ptr);
         }
-        return 0xff000000;
+        return CamomileEnvironment::getDefaultForegroundColor();
     }
     
     std::array<int, 4> Gui::getBounds() const noexcept
