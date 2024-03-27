@@ -144,7 +144,7 @@ set(CAMOMILE_COMPILE_DEFINITIONS
     JUCE_STRICT_REFCOUNTEDPOINTER=1
     JUCE_WEB_BROWSER=0
     JUCE_USE_CURL=0
-    JUCE_USE_DIRECTWRITE=1
+    #JUCE_USE_DIRECTWRITE=1
     PDINSTANCE=1 
     PDTHREADS=1
 )
@@ -175,6 +175,7 @@ file(GLOB CamomileBinaryDataSources
     ${CMAKE_CURRENT_SOURCE_DIR}/Resources/Images/copy.png
     ${CMAKE_CURRENT_SOURCE_DIR}/Resources/Images/reload.png
     ${CMAKE_CURRENT_SOURCE_DIR}/Resources/Images/zoom.png
+    ${CMAKE_CURRENT_SOURCE_DIR}/Resources/Images/terminal.png
     ${CMAKE_CURRENT_SOURCE_DIR}/Resources/Images/flower_petals.png
     ${CMAKE_CURRENT_SOURCE_DIR}/Resources/Images/icon.png
     ${CMAKE_CURRENT_SOURCE_DIR}/Resources/Images/flower_center.png)
