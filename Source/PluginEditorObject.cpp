@@ -573,7 +573,16 @@ void GuiPanel::mouseEnter(const MouseEvent& e)
     // This event helps to show hint texts in the plugin dynamically
     auto label = getLabel();
     if (label != nullptr) {
-        std::string symbol = "hint_" + label->getText().toStdString();
+        std::string symbol = "mouseenter_" + label->getText().toStdString();
+        patch.getProcessor().enqueueMessages(symbol, "symbol", {symbol});
+    }
+}
+
+void GuiPanel::mouseExit(const MouseEvent& e)
+{
+    auto label = getLabel();
+    if (label != nullptr) {
+        std::string symbol = "mouseexit_label";
         patch.getProcessor().enqueueMessages(symbol, "symbol", {symbol});
     }
 }
@@ -820,7 +829,13 @@ void GuiAtomNumber::mouseEnter(const MouseEvent& e)
 {
     // This does not belong to the standard GUI behaviors of Pure Data
     // This event helps to show hint texts in the plugin dynamically
-    std::string symbol = "hint_atom_number";
+    std::string symbol = "mouseenter_atom_number";
+    patch.getProcessor().enqueueMessages(symbol, "symbol", {symbol});
+}
+
+void GuiAtomNumber::mouseExit(const MouseEvent& e)
+{
+    std::string symbol = "mouseexit_atom_number";
     patch.getProcessor().enqueueMessages(symbol, "symbol", {symbol});
 }
 

@@ -162,6 +162,7 @@ public:
     GuiPanel(CamomileEditorMouseManager& p, pd::Gui& g);
     void paint(Graphics& g) override;
     void mouseEnter(const MouseEvent& e) override;
+    void mouseExit(const MouseEvent& e) override;
 };
 
 class GuiComment : public PluginEditorObject
@@ -204,6 +205,7 @@ public:
     void mouseUp(const juce::MouseEvent& e) override;
     void mouseDoubleClick(const juce::MouseEvent&) override;
     void mouseEnter(const juce::MouseEvent&) override;
+    void mouseExit(const juce::MouseEvent&) override;
 private:
     bool    shift = false;
     float   last  = 0.0f;
