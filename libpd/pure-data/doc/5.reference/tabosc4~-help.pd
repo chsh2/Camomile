@@ -1,0 +1,45 @@
+#N canvas 571 120 691 648 12;
+#X floatatom 92 309 4 0 0 0 - - -;
+#X obj 92 339 sig~ 100;
+#X obj 394 271 table table1;
+#X obj 493 272 table table2;
+#X text 302 582 Updated for Pd version 0.33;
+#X obj 58 17 tabosc4~;
+#X msg 112 390 set table1;
+#X obj 92 466 tabosc4~ table1, f 18;
+#X msg 122 416 set table2;
+#X text 51 169 For good results use 512 points for up to about 15 partials
+\, or 32*npartials (rounded up to a power of 2) for more than 15,
+f 61;
+#X floatatom 215 435 4 0 0 0 - - -;
+#X text 133 301 signal input for frequency (Hz.), f 17;
+#X text 197 391 message to switch tables;
+#X text 255 435 inlet to reset phase;
+#X text 226 467 creation argument initializes table;
+#X text 51 54 tabosc4~ is a traditional computer music style wavetable
+lookup oscillator using 4-point polynomial interpolation. The table
+should have a power of two points plus three "guard points" \, one
+at the beginning and two at the end \, which should be wraparound copies
+of the last point and the first two points \, respectively. The "sinesum"
+and "cosinesum" methods for arrays do this automatically for you if
+you just want to specify partial strengths., f 68;
+#X text 128 18 - 4-point interpolating oscillator;
+#X text 414 381 click above \, start DSP \, and turn output volume
+up to hear this, f 33;
+#X text 52 210 Don't send new "sinesum" messages to tables while you're
+running - instead \, use "set" messages to switch between tables.,
+f 64;
+#X obj 305 278 loadbang;
+#X msg 305 311 \; table1 sinesum 512 1 1 1 1 \, normalize \; table2
+cosinesum 512 0 1;
+#X obj 91 513 output~;
+#X text 370 543 see also:;
+#X obj 453 543 osc~;
+#X connect 0 0 1 0;
+#X connect 1 0 7 0;
+#X connect 6 0 7 0;
+#X connect 7 0 21 0;
+#X connect 7 0 21 1;
+#X connect 8 0 7 0;
+#X connect 10 0 7 1;
+#X connect 19 0 20 0;

@@ -1,0 +1,29 @@
+#N canvas 675 95 495 378 12;
+#X msg 74 179 bang;
+#X obj 66 15 until;
+#X text 28 50 The until object's left inlet starts a loop in which
+it outputs "bang" until its right inlet gets a bang which stops it.
+If you start "until" with a number \, it iterates at most that number
+of times \, as in the Max "uzi" object.;
+#X text 33 128 WARNING: if you bang an "until" which doesn't have a
+stopping mechanism \, Pd goes into an infinite loop!;
+#X obj 74 237 until;
+#X text 119 178 start;
+#X msg 82 206 3;
+#X text 118 207 start limited to 3 iterations;
+#X obj 74 265 f;
+#X obj 112 265 + 1;
+#X obj 157 264 sel 0;
+#X obj 74 319 print;
+#X obj 112 291 mod 10;
+#X text 234 310 updated for Pd version 0.28;
+#X text 115 16 - loop;
+#X connect 0 0 4 0;
+#X connect 4 0 8 0;
+#X connect 6 0 4 0;
+#X connect 8 0 9 0;
+#X connect 8 0 11 0;
+#X connect 9 0 12 0;
+#X connect 10 0 4 1;
+#X connect 12 0 8 1;
+#X connect 12 0 10 0;

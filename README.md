@@ -2,11 +2,22 @@
 
 The purpose of this fork is to develop my own audio plugins. To achieve this, several modifications were made based on [Camomile v1.0.8-beta10](https://github.com/pierreguillot/Camomile/tree/v1.0.8-beta10):
 
+### Pd Objects
 - Add most of the external objects from [pd-else v1.0-beta44](https://github.com/porres/pd-else/tree/v1.0-beta44).
 - Add a few external objects from [cyclone v0.6.0](https://github.com/porres/pd-cyclone/tree/cyclone_0.6-0).
-- Modify a few objects. Check more [details](Patches/README.md).
+  - `[greaterthan]` and `[lessthan]`
+  - `[rampsmooth]`
+- Modify a few objects.
+  - `[adsr~]`: Modify the input sockets to have the same API as ELSE 1.0 RC-12:
+    - Taking integer (0-127) velocity values instead of float (0-1) ones.
+    - Default flag being `-log` instead of `-lin`.
+  - `[sigmund~]`: Updated to Pd 0.54-1 from 0.52-0.
+
+### UI
 - Replace the default font with [Sarasa Mono](https://github.com/be5invis/Sarasa-Gothic) to display Chinese/Japanese characters. However, this also significantly increases the size of compiled binary files.
 - Changes of some GUI components.
+  - Add new configuration keywords `default_foreground_color`, `default_background_color` and `transparent_color` that extend the color options of native Pd GUI.
+  - Add mouse enter/exit events to Pd number and canvas objects.
 
 Please note that this fork may not be suitable for general use. If you are looking for a Camomile fork that supports pd-else, please consider [porres/Camomile-ELSE](https://github.com/porres/Camomile-ELSE) or [emviveros/Camomile-ELSE](https://github.com/emviveros/Camomile-ELSE).
 
