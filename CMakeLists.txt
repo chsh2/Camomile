@@ -1,5 +1,9 @@
 cmake_minimum_required(VERSION 3.12)
-set (CMAKE_CXX_STANDARD 20)
+
+if(APPLE)
+  add_compile_options(-Wno-error=implicit-function-declaration)
+endif()
+set(CMAKE_CXX_STANDARD 20)
 
 set(CMAKE_OSX_DEPLOYMENT_TARGET "10.9" CACHE STRING "Minimum OS X deployment version")
 set(CMAKE_OSX_ARCHITECTURES "$(ARCHS_STANDARD)" CACHE STRING "" FORCE)

@@ -6,7 +6,7 @@ The purpose of this fork is to develop my own audio plugins. To achieve this, se
 - Add most of the external objects from [pd-else v1.0-beta44](https://github.com/porres/pd-else/tree/v1.0-beta44).
 - Add a few external objects from [cyclone v0.6.0](https://github.com/porres/pd-cyclone/tree/cyclone_0.6-0).
   - `[greaterthan]` and `[lessthan]`
-  - `[rampsmooth]`
+  - `[rampsmooth~]`
 - Modify a few objects.
   - `[adsr~]`: Modify the input sockets to have the same API as ELSE 1.0 RC-12:
     - Taking integer (0-127) velocity values instead of float (0-1) ones.
