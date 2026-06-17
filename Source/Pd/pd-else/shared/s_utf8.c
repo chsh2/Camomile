@@ -54,16 +54,16 @@ int u8_seqlen(char *s)
 /* conversions without error checking
    only works for valid UTF-8, i.e. no 5- or 6-byte sequences
    srcsz = source size in bytes, or -1 if 0-terminated
-   sz = dest size in # of wide characters
+   sz = dest size in # of UTF-16 code units
 
-   returns # characters converted
+   returns # UTF-16 code units written
    dest will always be L'\0'-terminated, even if there isn't enough room
    for all the characters.
    if sz = srcsz+1 (i.e. 4*srcsz+4 bytes), there will always be enough space.
 */
 int u8_utf8toucs2(uint16_t *dest, int sz, char *src, int srcsz)
 {
-    uint16_t ch;
+    uint32_t ch;
     char *src_end = src + srcsz;
     int nb;
     int i=0;
@@ -86,7 +86,17 @@ int u8_utf8toucs2(uint16_t *dest, int sz, char *src, int srcsz)
         case 0: ch += (unsigned char)*src++; /* falls through */
         }
         ch -= offsetsFromUTF8[nb];
-        dest[i++] = ch;
+        if (ch < 0x10000)
+            dest[i++] = (uint16_t)ch;
+        else if (ch < 0x110000)
+        {
+            if (i >= sz-2)
+                goto done_toucs;
+            ch -= 0x10000;
+            dest[i++] = (uint16_t)(0xD800 + (ch >> 10));
+            dest[i++] = (uint16_t)(0xDC00 + (ch & 0x3FF));
+        }
+        else goto done_toucs;
     }
  done_toucs:
     dest[i] = 0;
@@ -107,7 +117,7 @@ int u8_utf8toucs2(uint16_t *dest, int sz, char *src, int srcsz)
 */
 int u8_ucs2toutf8(char *dest, int sz, uint16_t *src, int srcsz)
 {
-    uint16_t ch;
+    uint32_t ch;
     int i = 0;
     char *dest_end = dest + sz;
 
@@ -123,6 +133,19 @@ int u8_ucs2toutf8(char *dest, int sz, uint16_t *src, int srcsz)
                 return i;
             *dest++ = (ch>>6) | 0xC0;
             *dest++ = (ch & 0x3F) | 0x80;
+        }
+        else if (ch >= 0xD800 && ch <= 0xDBFF &&
+            (srcsz<0 ? src[i+1]!=0 : i+1 < srcsz) &&
+            src[i+1] >= 0xDC00 && src[i+1] <= 0xDFFF)
+        {
+            ch = 0x10000 + (((ch - 0xD800) << 10) | (src[i+1] - 0xDC00));
+            if (dest >= dest_end-3)
+                return i;
+            *dest++ = (ch>>18) | 0xF0;
+            *dest++ = ((ch>>12) & 0x3F) | 0x80;
+            *dest++ = ((ch>>6) & 0x3F) | 0x80;
+            *dest++ = (ch & 0x3F) | 0x80;
+            i++;
         }
         else {
             if (dest >= dest_end-2)
@@ -278,4 +301,3 @@ void u8_dec(char *s, int *i)
     (void)(isutf(s[--(*i)]) || isutf(s[--(*i)]) ||
            isutf(s[--(*i)]) || --(*i));
 }
-

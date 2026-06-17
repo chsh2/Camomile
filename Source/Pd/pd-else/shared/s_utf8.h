@@ -40,7 +40,7 @@
 /* is c the start of a utf8 sequence? */
 #define isutf(c) (((c)&0xC0)!=0x80)
 
-/* convert UTF-8 data to UCS-2 wide character */
+/* convert UTF-8 data to UTF-16 wide characters */
 int u8_utf8toucs2(uint16_t *dest, int sz, char *src, int srcsz);
 
 /* the opposite conversion */
