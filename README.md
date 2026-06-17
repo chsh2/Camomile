@@ -7,6 +7,8 @@ The purpose of this fork is to develop my own audio plugins. To achieve this, se
 - Add a few external objects from [cyclone v0.6.0](https://github.com/porres/pd-cyclone/tree/cyclone_0.6-0).
   - `[greaterthan]` and `[lessthan]`
   - `[rampsmooth~]`
+- Add external objects from pd-l2ork/ekext.
+  - `[lpc~]` and `[lpreson~]` by Nicolas Chetry <okin@altern.org> & Edward Kelly <morph_2016@yahoo.co.uk>
 - Modify a few objects.
   - `[adsr~]`: Modify the input sockets to have the same API as ELSE 1.0 RC-12:
     - Taking integer (0-127) velocity values instead of float (0-1) ones.

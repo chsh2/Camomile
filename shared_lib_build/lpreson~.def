@@ -1,0 +1,2 @@
+LIBRARY lpreson~
+EXPORTS lpreson_tilde_setup

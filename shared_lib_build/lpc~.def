@@ -1,0 +1,2 @@
+LIBRARY lpc~
+EXPORTS lpc_tilde_setup

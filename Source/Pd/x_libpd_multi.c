@@ -561,6 +561,10 @@ void greaterthan_tilde_setup(void);
 void lessthan_tilde_setup(void);
 void rampsmooth_tilde_setup(void);
 
+// ekext objects declaration
+void lpc_tilde_setup(void);
+void lpreson_tilde_setup(void);
+
 void pd_tilde_setup(void);
 
 void libpd_multi_init(void)
@@ -844,6 +848,10 @@ void libpd_multi_init(void)
         greaterthan_tilde_setup();
         lessthan_tilde_setup();
         rampsmooth_tilde_setup();
+
+        // ekext objects initialization
+        lpc_tilde_setup();
+        lpreson_tilde_setup();
 
         initialized = 1;
     }
