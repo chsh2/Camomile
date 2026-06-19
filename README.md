@@ -73,6 +73,17 @@ cmake .. (the generator can be specified using -G"Unix Makefiles", -G"XCode" or 
 cmake --build .
 ```
 
+To compile a Release build instead of Debug:
+
+```
+# Linux
+cmake -D CMAKE_BUILD_TYPE=Release ..
+# Windows
+cmake --build . --config Release
+```
+
+In Linux, the compilation process is largely impacted by the choice of compiler and its version. If there are compatibility issues, it is recommended to use a `ubuntu:22.04` Docker container.
+
 **Important:**
 - Please ensure that the git submodules are initialized and updated! You can use the `--recursive` option while cloning or `git submodule update --init --recursive` in the Camomile repository .
 - On Linux OS, Juce framework requires to install dependencies, please refer to [Linux Dependencies.md](https://github.com/juce-framework/JUCE/blob/master/docs/Linux%20Dependencies.md) and use the full command.
